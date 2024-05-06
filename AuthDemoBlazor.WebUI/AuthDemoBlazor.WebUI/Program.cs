@@ -1,4 +1,4 @@
-using AuthDemoBlazor.WebUI.Client.Pages;
+using AuthDemoBlazor.Infrastructure;
 using AuthDemoBlazor.WebUI.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.RegisterInfrastructureServices(builder.Configuration);
 
 var app = builder.Build();
 

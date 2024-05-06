@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  authdemoblazor.webui:
+    image: ${DOCKER_REGISTRY-}authdemoblazorwebui
+    build:
+      context: .
+      dockerfile: AuthDemoBlazor.WebUI/AuthDemoBlazor.WebUI/Dockerfile
+    depends_on:
+      authdemo.db-postgres:
+        condition: service_started
+  authdemo.db-postgres:
+    image: postgres:latest
+    container_name: AuthDemoBlazor.DB-Postgres
+    environment:
+      - POSTGRES_DB=AuthDemoBlazor
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./.containers/authdemo:/var/lib/postgres/data/
+    ports:
+     - "5432:5432"
