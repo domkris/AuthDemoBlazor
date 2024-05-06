@@ -9,6 +9,7 @@ namespace AuthDemoBlazor.Infrastructure
         public AuthDemoBlazorDbContext(
             DbContextOptions<AuthDemoBlazorDbContext> options) : base(options)
         {
+
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
