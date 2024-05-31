@@ -1,13 +1,22 @@
 ﻿using AuthDemoBlazor.Domain.Audit;
-using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace AuthDemoBlazor.Domain.Entities
 {
-    public class User : IdentityUser<long>, IAuditableEntity
+    public class User: IAuditableEntity
     {
+        public long Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+        public string? UserName { get; set; }
+
+        public string? Email { get; set; }
+        public bool EmailConfirmed { get; set; }
+        public string? Password { get; set; }
+        public bool TwoFactorEnabled { get; set; }
+        public bool LockoutEnabled { get; set; }
+        public int AccessFailedCount { get; set; }
+
 
         [Required]
         public long RoleId { get; set; }

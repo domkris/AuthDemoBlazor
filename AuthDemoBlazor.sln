@@ -5,15 +5,15 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F399E1F2-0432-4261-9702-1F60F44D17CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthDemoBlazor.Domain", "AuthDemoBlazor.Domain\AuthDemoBlazor.Domain.csproj", "{3101755E-14D4-417E-AC57-49C44B6ECE5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthDemoBlazor.Domain", "AuthDemoBlazor.Domain\AuthDemoBlazor.Domain.csproj", "{3101755E-14D4-417E-AC57-49C44B6ECE5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthDemoBlazor.Application", "AuthDemoBlazor.Application\AuthDemoBlazor.Application.csproj", "{2B011D00-CBAA-465A-BD9E-93AE86C82F77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthDemoBlazor.Application", "AuthDemoBlazor.Application\AuthDemoBlazor.Application.csproj", "{2B011D00-CBAA-465A-BD9E-93AE86C82F77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthDemoBlazor.Infrastructure", "AuthDemoBlazor.Infrastructure\AuthDemoBlazor.Infrastructure.csproj", "{FDD31607-DAF5-4D49-9DD4-FE4B88EC9732}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthDemoBlazor.Infrastructure", "AuthDemoBlazor.Infrastructure\AuthDemoBlazor.Infrastructure.csproj", "{FDD31607-DAF5-4D49-9DD4-FE4B88EC9732}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthDemoBlazor.WebUI", "AuthDemoBlazor.WebUI\AuthDemoBlazor.WebUI\AuthDemoBlazor.WebUI.csproj", "{FE0C27A1-D4D0-4EA3-8CF2-D07FA05FBC2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthDemoBlazor.WebUI", "AuthDemoBlazor.WebUI\AuthDemoBlazor.WebUI\AuthDemoBlazor.WebUI.csproj", "{FE0C27A1-D4D0-4EA3-8CF2-D07FA05FBC2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthDemoBlazor.WebUI.Client", "AuthDemoBlazor.WebUI\AuthDemoBlazor.WebUI.Client\AuthDemoBlazor.WebUI.Client.csproj", "{5E78D253-63D0-42F0-8BE5-BE16B3BFDE45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthDemoBlazor.WebUI.Client", "AuthDemoBlazor.WebUI\AuthDemoBlazor.WebUI.Client\AuthDemoBlazor.WebUI.Client.csproj", "{5E78D253-63D0-42F0-8BE5-BE16B3BFDE45}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{79C6AA2C-1DE4-49FE-933C-1652B1D63E94}"
 EndProject

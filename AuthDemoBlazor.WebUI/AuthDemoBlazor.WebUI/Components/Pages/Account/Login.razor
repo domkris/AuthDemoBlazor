@@ -1,0 +1,99 @@
+﻿@page "/Login"
+
+@using AuthDemoBlazor.WebUI.ViewModels
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.Data.SqlClient
+@using Npgsql
+@using System.Security.Claims
+@inject AuthDemoBlazor.Domain.Interfaces.IUserService _userService
+@inject NavigationManager _navigationManager
+
+<PageTitle>Log in</PageTitle>
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        <EditForm Model="@LoginViewModel" OnValidSubmit="LoginUser" FormName="LoginForm">
+            <DataAnnotationsValidator/>
+            <div>
+                <h2>LOGIN</h2>
+            </div>
+            <hr />
+            <ValidationSummary class="text-danger" role="alert" />
+            <div class="form-floating mb-3">
+                <InputText type="email" @bind-Value="LoginViewModel.Email" class="form-control" autocomplete="current-email" aria-required="true" placeholder="Email" />
+                <label for="email" class="form-label">Email</label>
+                <ValidationMessage For="() => LoginViewModel.Email" class="text-danger" />
+            </div>
+            <div class="form-floating mb-3">
+                <InputText type="password" @bind-Value="LoginViewModel.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Password" />
+                <label for="password" class="form-label">Password</label>
+                <ValidationMessage For="() => LoginViewModel.Password" class="text-danger" />
+            </div>
+            <div class="form-floating mb-3 text-center">
+                <span class="text-danger">@errorMessage</span>
+            </div>
+            <div>
+                <button type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public HttpContext? HttpContext { get; set; }
+
+    private string? errorMessage;
+
+    [SupplyParameterFromForm]
+    public LoginViewModel LoginViewModel { get; set; } = new();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        if (HttpContext.User.Identity.IsAuthenticated)
+        {
+            _navigationManager.NavigateTo("/");
+        }
+    }
+
+    public async Task LoginUser()
+    {
+
+        var userAccount = await _userService.FindByEmailAsync(LoginViewModel.Email);
+
+        if(userAccount is not null)
+        {
+            var providedPassword = LoginViewModel.Password;
+            var result = new PasswordHasher<Domain.Entities.User>().VerifyHashedPassword(userAccount, userAccount.Password!, providedPassword);
+
+            if(result is not PasswordVerificationResult.Success)
+            {
+                errorMessage = "Invalid email/password";
+            }
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, userAccount.UserName!),
+                new Claim(ClaimTypes.Email, userAccount.Email!),
+                new Claim(ClaimTypes.NameIdentifier, userAccount.Id.ToString()),
+                new Claim(ClaimTypes.Role, userAccount.RoleId.ToString()),
+            };
+
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(identity);
+
+            await HttpContext.SignInAsync(principal);
+            _navigationManager.NavigateTo("/");
+
+        }
+        else
+        {
+            errorMessage = "Invalid email/password";
+        }
+    }
+}

@@ -33,9 +33,7 @@ namespace AuthDemoBlazor.Infrastructure.EntitiesConfiguration
                 RoleId = (long)Roles.Administrator,
                 IsActive = false,
                 UserName = "system",
-                NormalizedUserName = "SYSTEM",
                 EmailConfirmed = false,
-                PhoneNumberConfirmed = false,
                 TwoFactorEnabled = false,
                 LockoutEnabled = false,
                 AccessFailedCount = 0
@@ -48,18 +46,14 @@ namespace AuthDemoBlazor.Infrastructure.EntitiesConfiguration
                 IsActive = true,
                 CreatedById = 1,
                 UserName = "adminauthdemo",
-                NormalizedUserName = "ADMINAUTHDEMO",
                 Email = "admin@authdemo.com",
-                NormalizedEmail = "ADMIN@AUTHDEMO.COM",
                 EmailConfirmed = true,
-                SecurityStamp = GetSecurityStamp(),
-                PhoneNumberConfirmed = false,
                 TwoFactorEnabled = false,
                 LockoutEnabled = false,
                 AccessFailedCount = 0
             };
 
-            adminUser.PasswordHash = new PasswordHasher<Domain.Entities.User>().HashPassword(adminUser, "12345678");
+            adminUser.Password = new PasswordHasher<Domain.Entities.User>().HashPassword(adminUser, "12345678");
 
             return new List<Domain.Entities.User>()
             {

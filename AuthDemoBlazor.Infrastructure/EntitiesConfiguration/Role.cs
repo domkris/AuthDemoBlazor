@@ -9,9 +9,7 @@ namespace AuthDemoBlazor.Infrastructure.EntitiesConfiguration
         public void Configure(EntityTypeBuilder<Domain.Entities.Role> builder)
         {
             builder.HasIndex(entity => entity.Name).IsUnique();
-            builder.HasIndex(entity => entity.NormalizedName).IsUnique();
             builder.Property(entity => entity.Name).IsRequired();
-            builder.Property(entity => entity.NormalizedName).IsRequired();
             builder.HasMany(entity => entity.Users)
                 .WithOne(entity => entity.Role);
             builder.HasData(SeedData());
@@ -24,8 +22,7 @@ namespace AuthDemoBlazor.Infrastructure.EntitiesConfiguration
                 .Select(role => new Domain.Entities.Role
                 { 
                     Id = (long) role,
-                    Name = role.ToString(),
-                    NormalizedName = role.ToString().ToUpperInvariant(),
+                    Name = role.ToString()
                 });
         }
     }
