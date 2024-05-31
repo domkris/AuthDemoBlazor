@@ -7,16 +7,18 @@ services:
       context: .
       dockerfile: AuthDemoBlazor.WebUI/AuthDemoBlazor.WebUI/Dockerfile
     depends_on:
-      authdemo.db-postgres:
+      authdemoblazor.db-sqlserver:
         condition: service_started
-  authdemo.db-postgres:
-    image: postgres:latest
-    container_name: AuthDemoBlazor.DB-Postgres
+  authdemoblazor.db-sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: AuthDemoBlazor.DB-SQLServer
     environment:
-      - POSTGRES_DB=AuthDemoBlazor
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong!Passw0rd
+      - MSSQL_DATABASE=AuthDemoBlazor
     volumes:
-      - ./.containers/authdemo:/var/lib/postgres/data/
+      - vmyvol:/app
     ports:
-     - "5432:5432"
+     - "1433:1433"
+volumes:
+  vmyvol:

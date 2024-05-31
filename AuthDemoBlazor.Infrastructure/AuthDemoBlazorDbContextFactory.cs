@@ -17,7 +17,7 @@ namespace AuthDemoBlazor.Infrastructure
 
             var optionsBuilder = new DbContextOptionsBuilder<AuthDemoBlazorDbContext>();
 
-            optionsBuilder.UseNpgsql(
+            optionsBuilder.UseSqlServer(
                  configuration.GetConnectionString("Default"),
                      builder => builder.MigrationsAssembly(typeof(AuthDemoBlazorDbContext).Assembly.FullName));
 
